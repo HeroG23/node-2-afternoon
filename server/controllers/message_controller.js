@@ -2,18 +2,19 @@ let messages =[];
 let id = 0;
 
 module.exports ={
-    create: (res, req) => {
+    create: (req, res) => {
         const {text, time} = req.body;
         messages.push({id, text, time});
         id++
         res.status(200).send(messages);
     },
-    read: (res, req) => {
+    read: (req, res) => {
         res.status(200).send(messages);
     },
-    update: (res, req) => {
+    update: (req, res) => {
         const {text} = req.body;
-        const messageIndex = messages.findIndex(message => message.id === +req.params.id);
+        const updateId = req.params.id
+        const messageIndex = messages.findIndex(message => message.id == updateId);
         const message = messages[messageIndex];
 
         messages[messageIndex] ={
@@ -23,9 +24,10 @@ module.exports ={
         };
         res.status(200).send(messages);
     },
-    delete: (res, req) =>{
-        const messageIndex = messages.findIndex(message => message.id === +req.params.id);
+    delete: (req, res) => {
+        const deleteID = req.params.id;    
+        const messageIndex = messages.findIndex(message => message.id == deleteID);
         messages.splice(messageIndex, 1);
         res.status(200).send(messages);
-    }
+      }
 }

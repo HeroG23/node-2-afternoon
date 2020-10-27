@@ -1,5 +1,5 @@
 const express = require('express');
-const mc = require('./controllers/message_controller.js')
+const mc = require('./controllers/message_controller.js');
 const app = express();
 
 app.use(express.json());
